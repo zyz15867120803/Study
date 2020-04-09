@@ -22,17 +22,17 @@ function run(generatorFunc) {
                 generated.value.then(val => {
                     try {
                         generated = iterator.next(val);
+                        step();
                     } catch(e) {
                         reject(e);
                     }
-                    step();
                 }, reason => {
                     try {
                         generated = iterator.throw(reason);
+                        step();
                     } catch(e) {
                         reject(e);
                     }
-                    step();
                 })
             } else {
                 Promise.resolve(generated.value).then(resolve, reject);
